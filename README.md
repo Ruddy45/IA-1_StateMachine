@@ -18,8 +18,8 @@ For debugging purpose, I also add the possibility to set the initial state for e
 2. Choose your character and his own initial state :
 ![Intial State](assets/1-choose-initial-state.png)
 
-3. Enjoy discussions between 3 characters !
-![Calm talk between Bob and Patrick](assets/calm-talk-with-drunken.png)
+3. Enjoy discussions between 3 characters !  
+![Calm talk between Bob and Patrick](assets/2-calm-talk-with-drunken.png)
 
 
 ## License
