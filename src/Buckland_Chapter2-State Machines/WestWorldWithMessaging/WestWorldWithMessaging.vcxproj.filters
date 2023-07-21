@@ -45,10 +45,10 @@
     <ClCompile Include="..\..\Common\Time\CrudeTimer.cpp">
       <Filter>misc</Filter>
     </ClCompile>
-    <ClCompile Include="Drunken.cpp">
+    <ClCompile Include="MinerFriend.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DrunkenOwnedStates.cpp">
+    <ClCompile Include="MinerFriendOwnedStates.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -110,10 +110,10 @@
     <ClInclude Include="..\..\Common\utils.h">
       <Filter>misc</Filter>
     </ClInclude>
-    <ClInclude Include="Drunken.h">
+    <ClInclude Include="MinerFriend.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DrunkenOwnedStates.h">
+    <ClInclude Include="MinerFriendOwnedStates.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -132,13 +132,13 @@ void VisitBathroom::Execute(MinersWife* wife)
 {
   cout << "\n" << GetNameOfEntity(wife->ID()) << ": Ahhhhhh! Sweet relief!";
 
-  // Modification pour permettre de choisir cet état initial,
-  // car cela produisait une erreur vu qu'il n'y avait pas d'état précédents
-  if (wife->GetFSM()->PreviousState()) // S'il l'état précédent existe
+  // Can be nulled if visit bathroom was the initial choices.
+  if (wife->GetFSM()->PreviousState())
   {
 	  wife->GetFSM()->RevertToPreviousState();
   }
-  else if (RandInt(0, 2) < 1) // Random pour choisir un des deux états à faire s'il n'y a pas d'état précédent
+  // Switch between two task with randomness.
+  else if (RandInt(0, 2) < 1)
   {
 	  wife->GetFSM()->ChangeState(CookStew::Instance());
   }

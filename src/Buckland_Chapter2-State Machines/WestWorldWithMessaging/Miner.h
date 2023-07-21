@@ -86,48 +86,9 @@ public:
   
   StateMachine<Miner>* GetFSM()const{return m_pStateMachine;}
 
-  
-  // Renvoie un tableau des diffèrents états de l'agent 
-  // à l'utilisateur pour qu'il choisisse l'état initial
-  void GiveStateName(std::vector<string>& list)
-  {
-	  list.push_back("EnterMineAndDigForNugget");
-	  list.push_back("VisitBankAndDepositGold");
-	  list.push_back("GoHomeAndSleepTilRested");
-	  list.push_back("QuenchThirst");
-	  list.push_back("EatStew");  
-  };
+  std::vector<std::string> GetStatesNames();
 
-
-  // L'utilisateur définie l'état initial de l'agent
-  bool UserSetInitialState(const int& initialState)
-  {
-	  switch (initialState)
-	  {
-		  case 0:
-			  m_pStateMachine->SetCurrentState(EnterMineAndDigForNugget::Instance());
-			  return true;
-
-		  case 1:
-			  m_pStateMachine->SetCurrentState(VisitBankAndDepositGold::Instance());
-			  return true;
-			
-		  case 2:
-			  m_pStateMachine->SetCurrentState(GoHomeAndSleepTilRested::Instance());
-			  return true;
-
-		  case 3:
-			  m_pStateMachine->SetCurrentState(QuenchThirst::Instance());
-			  return true;
-
-		  case 4:
-			  m_pStateMachine->SetCurrentState(EatStew::Instance());
-			  return true;
-	  }
-
-	  return false;
-  }
-
+  bool SetInitialState(int initialState);
 
   //-------------------------------------------------------------accessors
   location_type Location()const{return m_Location;}

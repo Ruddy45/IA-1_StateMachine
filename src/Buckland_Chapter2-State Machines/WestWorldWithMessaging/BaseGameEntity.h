@@ -49,12 +49,18 @@ public:
   //using the MessageDispatcher singleton class
   virtual bool  HandleMessage(const Telegram& msg)=0;
 
-  // Renvoie un tableau des diffèrents noms des états de l'agent 
-  // à l'utilisateur pour qu'il choisisse l'état initial
-  virtual void GiveStateName(std::vector<std::string>& list) {}
+  /// <summary>
+  /// Get all states for an entity.
+  /// </summary>
+  /// <returns>List of states name available by the current entity.</returns>
+  virtual std::vector<std::string> GetStatesNames() = 0;
 
-  // L'utilisateur définie l'état initial de l'agent
-  virtual bool UserSetInitialState(const int& initialState) { return false; }
+  /// <summary>
+  /// Set initial state from user input.
+  /// </summary>
+  /// <param name="initialState">Initial state index</param>
+  /// <returns>Successful state change</returns>
+  virtual bool SetInitialState(int initialState) { return false; }
 
   int           ID()const{return m_ID;}  
 };

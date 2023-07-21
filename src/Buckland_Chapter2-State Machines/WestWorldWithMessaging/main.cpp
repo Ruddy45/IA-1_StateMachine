@@ -1,11 +1,11 @@
 #include <fstream>
 #include <time.h>
-#include <vector> // Pour utiliser les tableaux dynamiques
+#include <vector>
 
 #include "Locations.h"
 #include "Miner.h"
 #include "MinersWife.h"
-#include "Drunken.h" // Nouvel Agent
+#include "MinerFriend.h"
 #include "EntityManager.h"
 #include "MessageDispatcher.h"
 #include "misc/ConsoleUtils.h"
@@ -14,47 +14,66 @@
 using namespace std;
 std::ofstream os;
 
-
-// Affiche les différents agents disponibles pour définir un état initial
-void SelectAgent(vector<BaseGameEntity*>& listBaseGameEntity, unsigned int& indexAgentChoose, vector<string>& listState)
+/// <summary>
+/// Get selection command to set initial state in one character.
+/// </summary>
+/// <param name="characters">List of all characters / entity in the world.</param>
+/// <returns>Character selected by the user.</returns>
+BaseGameEntity* GetSelectedCharacter(const vector<BaseGameEntity*>& characters)
 {
+	bool bValidChoice = false;
+	int chooseIndex;
+
 	do
 	{
-		cout << "Saisissez le numero de l'agent auquel vous voulez definir l'etat initial : \n";
+		cout << "Enter the agent number for which you want to define the initial state : \n";
 
-		for (unsigned int i = 0; i < listBaseGameEntity.size(); ++i)
-			cout << i << " : " << GetNameOfEntity(listBaseGameEntity[i]->ID()) << "\n"; // Affiche le nom des agents
+		for (auto i = 0; i < characters.size(); ++i)
+			cout << i << " : " << GetNameOfEntity(characters[i]->ID()) << "\n";
 
-		cin >> indexAgentChoose; // Demande sur l'agent à définir l'état initial
+		cin >> chooseIndex;
 
-		if (indexAgentChoose < 0 || listBaseGameEntity.size() <= indexAgentChoose) // Vérifie les données de l'utilisateurs
-			cout << "Vous n'avez pas entre la bonne valeur.\n";
+		bValidChoice = (0 <= chooseIndex && chooseIndex < characters.size());
+		if (!bValidChoice)
+			cout << "Incorrect Value, rety ^^ \n";
 
-	} while (indexAgentChoose < 0 || listBaseGameEntity.size() <= indexAgentChoose); // Boucle jusqu'à ce que l'utilisateur donne les bonnes informations
+	// Loop until a character is chosen
+	} while (!bValidChoice);
 
-	cout << "\nVous avez choisie " << GetNameOfEntity(listBaseGameEntity[indexAgentChoose]->ID()) << "\n\n";
+	cout << "\nYou choose " << GetNameOfEntity(characters[chooseIndex]->ID()) << "\n\n";
 
-	listBaseGameEntity[indexAgentChoose]->GiveStateName(listState); // Récupère les états de l'agent sélectionné
+	return characters[chooseIndex];
 }
 
-// Affiche et prend la sélection de l'utilisateur des diffèrents états
-void SelectInitialState(vector<string>& listState, unsigned int& indexStateChoose, vector<BaseGameEntity*>& const listBaseGameEntity, unsigned int& const indexAgentChoose)
+/// <summary>
+/// Set initial state based on user inputs.
+/// </summary>
+/// <param name="selectedCharacter"></param>
+void SelectInitialState(BaseGameEntity* selectedCharacter)
 {
+	bool bValidChoice = false;
+	int chooseIndex;
+
+	auto stateList (selectedCharacter->GetStatesNames());
+
 	do
 	{
-		cout << "Choisissez l'etat initial voulu :\n";
+		cout << "Choose the initial state :\n";
 
-		for (unsigned int i = 0; i < listState.size(); ++i)
-			cout << i << " : " << listState[i] << "\n"; // Affiche les diffèrents noms d'états disponibles
+		for (auto i = 0; i < stateList.size(); ++i)
+			cout << i << " : " << stateList[i] << "\n";
 
-		cin >> indexStateChoose; // Prend l'état choisi par l'utilisateur
+		cin >> chooseIndex;
 
-		if (indexStateChoose < 0 || listState.size() <= indexStateChoose) // Vérifie les données de l'utilisateurs
-			cout << "Vous n'avez pas entre la bonne valeur.\n";
+		bValidChoice = (0 <= chooseIndex && chooseIndex < stateList.size());
+		if (!bValidChoice)
+			cout << "Incorrect Value, rety ^^ \n";
+	
+	// Loop until a character is chosen
+	} while (chooseIndex < 0 || stateList.size() <= chooseIndex);
 
-	} while (indexStateChoose < 0 || listState.size() <= indexStateChoose);
-
-	listBaseGameEntity[indexAgentChoose]->UserSetInitialState(indexStateChoose); // Définie à l'agent son état initial
+	// Define initial state
+	selectedCharacter->SetInitialState(chooseIndex);
 }
 
 int main()
@@ -73,33 +92,22 @@ int main()
 	//create his wife
 	MinersWife* Elsa = new MinersWife(ent_Elsa);
 
-	Drunken* Patrick = new Drunken(ent_Patrick); // Création du nouvel agent Soulard
+	MinerFriend* Patrick = new MinerFriend(ent_Patrick);
 
 	//register them with the entity manager
 	EntityMgr->RegisterEntity(Bob);
 	EntityMgr->RegisterEntity(Elsa);
-	EntityMgr->RegisterEntity(Patrick); // Enregistrement du nouvel agent
+	EntityMgr->RegisterEntity(Patrick);
 
-	// Liste des entités agents, utilisés pour définir l'état initial
-	vector<BaseGameEntity*> listBaseGameEntity;
-
-	// Stocke toutes les entités pour les utilisés pour choisir l'état initial
-	listBaseGameEntity.push_back(Bob);
-	listBaseGameEntity.push_back(Elsa);
-	listBaseGameEntity.push_back(Patrick);
-
-	// Contient le nom des diffèrents états de l'agent choisie
-	vector<string> listState;
-
-	unsigned int indexAgentChoose; // Index de l'agent choisi par l'utilisateur
-	unsigned int indexStateChoose; // Etat initial de l'agent choisi par l'utilisateur
+	// Add all characters in character selection list.
+	vector<BaseGameEntity*> characterSelectionList {Bob, Elsa, Patrick};
 
 	//------------------------------------------------------------------------
-	/* Demande à l'utilisateur sur quel agent, 
-	il veut définir l'état initial puis demande qu'elle état */
+	/* Debug Utils : Choose your character and it's initial state */
 	//------------------------------------------------------------------------
-	SelectAgent(listBaseGameEntity, indexAgentChoose, listState);
-	SelectInitialState(listState, indexStateChoose, listBaseGameEntity, indexAgentChoose);
+	BaseGameEntity* selectedCharacter = GetSelectedCharacter(characterSelectionList);
+	SelectInitialState(selectedCharacter);
+	selectedCharacter = nullptr;
 
 	//------------------------------------------------------------------------
 	/*run Bob, Elsa and Patrick through a few Update calls*/
@@ -108,7 +116,7 @@ int main()
   { 
     Bob->Update();
     Elsa->Update();
-	Patrick->Update(); // Nouvelle Agent
+	Patrick->Update();
 
     //dispatch any delayed messages
     Dispatch->DispatchDelayedMessages();
@@ -119,7 +127,7 @@ int main()
   //tidy up
   delete Bob;
   delete Elsa;
-  delete Patrick; // Supprime l'agent
+  delete Patrick;
 
   //wait for a keypress before exiting
   PressAnyKeyToContinue();

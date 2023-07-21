@@ -291,7 +291,7 @@ bool TalkWithDrunken::OnMessage(Miner* pMiner, const Telegram& msg)
 {
 	SetTextColor(BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE); // Couleurs messages
 
-	switch (msg.Msg) // Message qu'il reçoit de l'agent Drunken
+	switch (msg.Msg) // Message qu'il reçoit de l'agent MinerFriend
 	{
 	case Msg_GoodLuck: // Message reçu si l'autre agent n'est pas saoul
 

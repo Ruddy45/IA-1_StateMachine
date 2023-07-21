@@ -129,8 +129,8 @@
   <ItemGroup>
     <ClCompile Include="..\..\Common\Time\CrudeTimer.cpp" />
     <ClCompile Include="BaseGameEntity.cpp" />
-    <ClCompile Include="Drunken.cpp" />
-    <ClCompile Include="DrunkenOwnedStates.cpp" />
+    <ClCompile Include="MinerFriend.cpp" />
+    <ClCompile Include="MinerFriendOwnedStates.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MessageDispatcher.cpp" />
@@ -150,8 +150,8 @@
     <ClInclude Include="..\..\Common\Time\CrudeTimer.h" />
     <ClInclude Include="..\..\Common\utils.h" />
     <ClInclude Include="BaseGameEntity.h" />
-    <ClInclude Include="Drunken.h" />
-    <ClInclude Include="DrunkenOwnedStates.h" />
+    <ClInclude Include="MinerFriend.h" />
+    <ClInclude Include="MinerFriendOwnedStates.h" />
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="EntityNames.h" />
     <ClInclude Include="Locations.h" />

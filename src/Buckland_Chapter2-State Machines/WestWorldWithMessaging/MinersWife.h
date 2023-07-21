@@ -63,41 +63,9 @@ public:
   StateMachine<MinersWife>* GetFSM()const{return m_pStateMachine;}
 
 
-  // Renvoie un tableau des diffèrents états de l'agent 
-  // à l'utilisateur pour qu'il choisisse l'état initial
-  void GiveStateName(std::vector<string>& list)
-  {
-	  list.push_back("WifesGlobalState");
-	  list.push_back("DoHouseWork");
-	  list.push_back("VisitBathroom");
-	  list.push_back("CookStew");
-  };
+  std::vector<std::string> GetStatesNames();
 
-
-  // L'utilisateur définie l'état initial de l'agent
-  bool  UserSetInitialState(const int& initialState)
-  {
-	  switch (initialState)
-	  {
-	  case 0:
-		  m_pStateMachine->SetCurrentState(WifesGlobalState::Instance());
-		  return true;
-
-	  case 1:
-		  m_pStateMachine->SetCurrentState(DoHouseWork::Instance());
-		  return true;
-
-	  case 2:
-		  m_pStateMachine->SetCurrentState(VisitBathroom::Instance());
-		  return true;
-
-	  case 3:
-		  m_pStateMachine->SetCurrentState(CookStew::Instance());
-		  return true;
-	  }
-
-	  return false;
-  }
+  bool  SetInitialState(int initialState);
 
   //----------------------------------------------------accessors
   location_type Location()const{return m_Location;}
