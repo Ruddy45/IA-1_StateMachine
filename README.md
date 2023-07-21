@@ -1,18 +1,34 @@
-IA-1_StateMachine
+# Communication between state machines.
 
-Projet basé sur le chapitre 2 du livre de Mat Buckland "Programming Game AI by Example" (http://www.ai-junkie.com/books/toc_pgaibe.html).
+## About The Project
+It's based on a project of Mat Buckland : *"WestWorldMessaging"*.  
+
+My goal was to create a new character with his own finite-state machine.  
+He would talk with the other characters creating new states and new possibilities.
+
+For debugging purpose, I also add the possibility to set the initial state for each agent in command line.
+
+⚠️ Elsa can be quiet in some round because she is in the WifesGlobalState. It's a state that requires randomness to change.
 
 
-Ajout effectué :
+## Getting Started
+### Usage
+1. Open `WestWorldWithMessaging.sln` under *src/Buckland_Chapter2-State Machines/WestWorldWithMessaging*.
 
-Création de l'agent "saoulard" et de sa machine à états finis.
-Cet agent interagit avec le Mineur Bob déjà existant et inversement.
-Possibilité de choisir de l'état initial pour chaque agent.
+2. Choose your character and his own initial state :
+![Intial State](assets/1-choose-initial-state.png)
 
-Lorsque l'on choisit pour Elsa l'état WifesGlobalState comme état initial, elle va être "sous silence" pendant quelques tours, puisqu'elle n'a pas d'actions, elle n'effectue qu'un random pour passer à un autre état.
+3. Enjoy discussions between 3 characters !
+![Calm talk between Bob and Patrick](assets/calm-talk-with-drunken.png)
 
 
-En cas de problème sur le SDK :
+## License
+Distributed under the MIT License. See `LICENSE` for more information.
 
-Propriétés de la solution < Général
-Adapter la "Version du Windows SDK" et "Ensemble d'outils de plateforme" aux versions que vous utilisez.
+
+## Contact
+- Wesley Petit - [Website](https://wesleypetit.fr/) - wesley.petit.lemoine@gmail.com
+
+
+## Credits
+- [Mat Buckland, *"Programming Game AI by Example"*, Chapter 2](http://www.ai-junkie.com/books/toc_pgaibe.html).
