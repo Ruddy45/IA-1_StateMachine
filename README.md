@@ -13,7 +13,7 @@ For debugging purpose, I also add the possibility to set the initial state for e
 
 ## Getting Started
 ### Usage
-1. Open `WestWorldWithMessaging.sln` under *src/Buckland_Chapter2-State Machines/WestWorldWithMessaging*.
+1. Launch the executable or open `WestWorldWithMessaging.sln` under *src/Buckland_Chapter2-State Machines/WestWorldWithMessaging*.
 
 2. Choose your character and his own initial state :
 ![Intial State](assets/1-choose-initial-state.png)
